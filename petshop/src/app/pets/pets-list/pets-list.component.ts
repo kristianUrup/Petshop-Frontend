@@ -14,11 +14,13 @@ export class PetsListComponent implements OnInit {
   constructor(private petService: PetService) { }
 
   ngOnInit() {
-    this.pets = this.petService.getPets();
+    this.petService.getPets().subscribe(listOfPets=>{
+      this.pets=listOfPets
+    });
   }
 
   delete(id: number){
     this.petService.deletePet(id);
-    this.pets = this.petService.getPets();
+    // this.pets = this.petService.getPets();
   }
 }

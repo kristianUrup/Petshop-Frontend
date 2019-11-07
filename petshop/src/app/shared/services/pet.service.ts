@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Pet} from "../models/pet";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +10,7 @@ export class PetService {
 
   id: number = 1;
   pets: Pet[];
-  constructor() {
-    this.pets = [
-      {id:this.id++, name: "John", type:"Dog", price: 200},
-      {id:this.id++, name: "Jones", type:"Dog", price: 250},
-      {id:this.id++, name: "Mikael", type:"Cat", price: 100}
-    ];
+  constructor(private http: HttpClient) {
   }
 
   addPet(pet: Pet)
@@ -22,8 +19,9 @@ export class PetService {
     this.pets.push(pet);
   }
 
-  getPets(): Pet[]{
-    return this.pets;
+  getPets(): Observable<Pet[]>{
+    return this.http.get<Pet[]>
+    ('https://petshopapplication.azurewebsites.net/api/pets');
   }
 
   updatePet(pet:Pet){
