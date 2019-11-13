@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 export class PetService {
 
   id: number = 1;
+  apiUrl = 'https://petshopapplication.azurewebsites.net/api/pets';
   pets: Pet[];
   constructor(private http: HttpClient) {
   }
@@ -21,7 +22,7 @@ export class PetService {
 
   getPets(): Observable<Pet[]>{
     return this.http.get<Pet[]>
-    ('https://petshopapplication.azurewebsites.net/api/pets');
+    (this.apiUrl);
   }
 
   updatePet(pet:Pet){
@@ -30,12 +31,12 @@ export class PetService {
     this.pets[index] = pet;
   }
 
-  getPetById(id: number): Pet{
-    return this.pets.find(pet=>pet.id === id);
+  getPetById(id: number): Observable<Pet>{
+    return this.http.get<Pet>(this.apiUrl + '/'+ id);
   }
 
-  deletePet(id: number){
-    this.pets = this.pets.filter(pet=>pet.id !== id);
+  deletePet(id: number): Observable<any>{
+    return this.http.delete(this.apiUrl+ '/'+ id );
   }
 
 

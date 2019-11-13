@@ -22,12 +22,14 @@ export class PetUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
-    const pet = this.petService.getPetById(this.id);
-    this.petForm.patchValue({
-      name: pet.name,
-      type: pet.type,
-      price: pet.price
-    });
+    this.petService.getPetById(this.id)
+      .subscribe(petFromRest=>{
+        this.petForm.patchValue({
+          name: petFromRest.name,
+          type: petFromRest.type,
+          price: petFromRest.price
+        });
+      });
   }
 
   save(){
