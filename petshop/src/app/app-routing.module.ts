@@ -5,14 +5,18 @@ import {PetsListComponent} from "./pets/pets-list/pets-list.component";
 import {PetDetailsComponent} from "./pets/pet-details/pet-details.component";
 import {PetAddComponent} from "./pets/pet-add/pet-add.component";
 import {PetUpdateComponent} from "./pets/pet-update/pet-update.component";
+import {LoginComponent} from "./login/login.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 
 const routes: Routes = [
-  { path: '', component: WelcomeComponent},
+  { path: '', component: WelcomeComponent, canActivate: [AuthGuard]},
   { path: 'pets/:id', component: PetDetailsComponent},
   { path: 'pet-update/:id', component: PetUpdateComponent},
   { path: 'pet-add', component: PetAddComponent},
-  { path: 'pets', component: PetsListComponent}
+  { path: 'pets', component: PetsListComponent},
+  { path: 'login', component: LoginComponent},
+  { path: '**', redirectTo: ''}
 ];
 
 @NgModule({
