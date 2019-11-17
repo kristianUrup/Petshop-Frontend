@@ -2,8 +2,8 @@ export class Pet{
   id: number;
   name: string;
   type: string;
-  birthdate?: Date;
-  soldDate?: Date;
+  birthdate?: string;
+  soldDate?: string;
   colors?: [];
   price?: number;
   owners?:[];

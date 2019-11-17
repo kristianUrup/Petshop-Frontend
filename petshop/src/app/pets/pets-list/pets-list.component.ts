@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Pet} from "../../shared/models/pet";
 import {PetService} from "../../shared/services/pet.service";
+import {FilteredListPets} from "../../shared/filtering/filteredListPets";
 
 @Component({
   selector: 'app-pets-list',
@@ -9,7 +10,7 @@ import {PetService} from "../../shared/services/pet.service";
 })
 export class PetsListComponent implements OnInit {
 
-  pets: Pet[];
+  pets: FilteredListPets;
 
   constructor(private petService: PetService) { }
 
@@ -19,7 +20,7 @@ export class PetsListComponent implements OnInit {
 
   refresh (){
     this.petService.getPets().subscribe(listOfPets=>{
-      this.pets=listOfPets
+      this.pets = listOfPets
     });
   }
 

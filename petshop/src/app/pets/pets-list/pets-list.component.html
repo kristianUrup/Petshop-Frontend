@@ -1,5 +1,5 @@
 <ul *ngIf="pets">
-  <li *ngFor="let pet of pets">
+  <li *ngFor="let pet of pets.list">
     <a routerLink="/pets/{{pet.id}}">{{pet.name}}</a>
     <button routerLink="/pet-update/{{pet.id}}">Update</button>
     <button (click)="delete(pet.id)">Delete</button>

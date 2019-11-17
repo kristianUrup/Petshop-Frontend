@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Pet} from "../models/pet";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {FilteredListPets} from "../filtering/filteredListPets";
 
 @Injectable({
   providedIn: 'root'
@@ -10,24 +11,24 @@ export class PetService {
 
   id: number = 1;
   apiUrl = 'https://petshopapplication.azurewebsites.net/api/pets';
-  pets: Pet[];
+  pets: FilteredListPets;
   constructor(private http: HttpClient) {
   }
 
   addPet(pet: Pet)
   {
     pet.id = this.id++;
-    this.pets.push(pet);
+    this.pets.list.push(pet);
   }
 
-  getPets(): Observable<Pet[]>{
-    return this.http.get<Pet[]>
+  getPets(): Observable<FilteredListPets>{
+    return this.http.get<FilteredListPets>
     (this.apiUrl);
   }
 
   updatePet(pet:Pet){
-    const petToUpdate = this.pets.find(p=>p.id === pet.id);
-    const index = this.pets.indexOf(petToUpdate);
+    const petToUpdate = this.pets.list.find(p=>p.id === pet.id);
+    const index = this.pets.list.indexOf(petToUpdate);
     this.pets[index] = pet;
   }
 
