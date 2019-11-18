@@ -11,6 +11,9 @@ import { PetAddComponent } from './pets/pet-add/pet-add.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { PetUpdateComponent } from './pets/pet-update/pet-update.component';
 import { LoginComponent } from './login/login.component';
+import {AuthGuard} from "./guards/auth.guard";
+import {AuthenticationService} from "./shared/services/authentication/authentication.service";
+import {PetService} from "./shared/services/pet.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +32,11 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthenticationService,
+    PetService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

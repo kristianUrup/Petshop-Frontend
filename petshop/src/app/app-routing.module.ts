@@ -10,11 +10,11 @@ import {AuthGuard} from "./guards/auth.guard";
 
 
 const routes: Routes = [
-  { path: '', component: WelcomeComponent, canActivate: [AuthGuard]},
+  { path: '', component: WelcomeComponent},
   { path: 'pets/:id', component: PetDetailsComponent},
   { path: 'pet-update/:id', component: PetUpdateComponent},
   { path: 'pet-add', component: PetAddComponent},
-  { path: 'pets', component: PetsListComponent},
+  { path: 'pets', component: PetsListComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent},
   { path: '**', redirectTo: ''}
 ];

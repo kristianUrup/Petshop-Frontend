@@ -32,7 +32,7 @@ export class PetService {
 
   getPets(): Observable<FilteredListPets>{
     httpOptions.headers =
-      httpOptions.headers.set('Authorization', 'Bearer'+ this.authenticationService.getToken());
+      httpOptions.headers.set('Authorization', 'Bearer '+ this.authenticationService.getToken());
 
     return this.http.get<FilteredListPets>
     (environment.apiUrl+ '/api/pets', httpOptions);
