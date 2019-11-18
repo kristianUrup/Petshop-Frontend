@@ -14,6 +14,9 @@ import { LoginComponent } from './login/login.component';
 import {AuthGuard} from "./guards/auth.guard";
 import {AuthenticationService} from "./shared/services/authentication/authentication.service";
 import {PetService} from "./shared/services/pet.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSelectModule} from "@angular/material/select";
+import { FilterSelectComponent } from './filter-select/filter-select.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +27,16 @@ import {PetService} from "./shared/services/pet.service";
     PetDetailsComponent,
     PetAddComponent,
     PetUpdateComponent,
-    LoginComponent
+    LoginComponent,
+    FilterSelectComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSelectModule
   ],
   providers: [
     AuthGuard,
