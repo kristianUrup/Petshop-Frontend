@@ -3,6 +3,7 @@ import {Pet} from "../../shared/models/pet";
 import {PetService} from "../../shared/services/pet.service";
 import {FilteredListPets} from "../../shared/filtering/filteredListPets";
 import {AuthenticationService} from "../../shared/services/authentication/authentication.service";
+import {Filter} from "../../shared/filtering/filter";
 
 @Component({
   selector: 'app-pets-list',
@@ -21,10 +22,11 @@ export class PetsListComponent implements OnInit {
 
   ngOnInit() {
     this.refresh();
+    this.petService.filter.currentPage = 1;
+    this.petService.filter.itemsPrPage = 1;
   }
 
   refresh (){
-
     this.petService.getPets().subscribe(
       listOfPets=>{
       this.pets = listOfPets
@@ -40,6 +42,10 @@ export class PetsListComponent implements OnInit {
       console.log('Deleted user, got message: '+ message);
       this.refresh();
     });
-    // this.pets = this.petService.getPets();
+  }
+
+  setFilter(itemsPrPage: number){
+    this.petService.filter.currentPage = 1;
+    this.petService.filter.itemsPrPage = itemsPrPage;
   }
 }

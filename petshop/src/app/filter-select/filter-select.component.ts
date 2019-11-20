@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {filter} from "rxjs/operators";
 import {Filter} from "../shared/filtering/filter";
+import {PetsListComponent} from "../pets/pets-list/pets-list.component";
+import {NumberSelector} from "../shared/filtering/number-selector";
 
 @Component({
   selector: 'app-filter-select',
@@ -9,11 +11,21 @@ import {Filter} from "../shared/filtering/filter";
 })
 export class FilterSelectComponent implements OnInit {
 
-  filter: Filter;
-  items: number[] =[1,2,3,4,5];
-  constructor() { }
+  items: NumberSelector[] = [
+    {value: 1, viewValue: 1},
+    {value: 2, viewValue: 2},
+  ]
+  option: number;
+  constructor(private petsList: PetsListComponent) { }
 
   ngOnInit() {
   }
 
+  changeFilter(itemsPrPage: number){
+    this.petsList.setFilter(itemsPrPage);
+  }
+
+  setOption(item: number){
+    this.option = item;
+  }
 }

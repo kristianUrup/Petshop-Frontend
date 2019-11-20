@@ -1,5 +1,5 @@
 
-export class Filter{
+export interface Filter{
   currentPage: number;
   itemsPrPage: number;
 }

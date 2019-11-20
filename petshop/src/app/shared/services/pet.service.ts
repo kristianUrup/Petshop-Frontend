@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {FilteredListPets} from "../filtering/filteredListPets";
 import {environment} from "../../../environments/environment.prod";
 import {AuthenticationService} from "./authentication/authentication.service";
+import {Filter} from "../filtering/filter";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,8 +19,9 @@ const httpOptions = {
 })
 export class PetService {
 
+  filter: Filter;
   id: number = 1;
-  apiUrl = 'https://petshopapplication.azurewebsites.net/api/pets';
+  apiUrl = 'https://petshopapplication.azurewebsites.net/api/';
   pets: FilteredListPets;
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
   }
@@ -35,7 +37,7 @@ export class PetService {
       httpOptions.headers.set('Authorization', 'Bearer '+ this.authenticationService.getToken());
 
     return this.http.get<FilteredListPets>
-    (environment.apiUrl+ '/api/pets', httpOptions);
+    (environment.apiUrl+ '/api/pets' + '?CurrentPage=' + this.filter.currentPage + '&ItemsPrPage=' + this.filter.itemsPrPage, httpOptions);
   }
 
   updatePet(pet:Pet): Observable<Pet>{
