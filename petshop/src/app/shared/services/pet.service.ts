@@ -19,7 +19,6 @@ const httpOptions = {
 })
 export class PetService {
 
-  filter: Filter;
   id: number = 1;
   apiUrl = 'https://petshopapplication.azurewebsites.net/api/';
   pets: FilteredListPets;
@@ -32,12 +31,12 @@ export class PetService {
     this.pets.list.push(pet);
   }
 
-  getPets(): Observable<FilteredListPets>{
+  getPets(itemsPrPage: number, currentPage: number): Observable<FilteredListPets>{
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer '+ this.authenticationService.getToken());
 
     return this.http.get<FilteredListPets>
-    (environment.apiUrl+ '/api/pets' + '?CurrentPage=' + this.filter.currentPage + '&ItemsPrPage=' + this.filter.itemsPrPage, httpOptions);
+    (environment.apiUrl + '/api/pets?CurrentPage=' + currentPage + '&ItemsPrPage=' + itemsPrPage, httpOptions);
   }
 
   updatePet(pet:Pet): Observable<Pet>{

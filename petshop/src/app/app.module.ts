@@ -16,7 +16,10 @@ import {AuthenticationService} from "./shared/services/authentication/authentica
 import {PetService} from "./shared/services/pet.service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from "@angular/material/select";
-import { FilterSelectComponent } from './filter-select/filter-select.component';
+import { FilterSelectComponent } from './pets/filter-select/filter-select.component';
+import { PaginationComponent } from './pets/pagination/pagination.component';
+import {MatButtonModule} from "@angular/material/button";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { FilterSelectComponent } from './filter-select/filter-select.component';
     PetAddComponent,
     PetUpdateComponent,
     LoginComponent,
-    FilterSelectComponent
+    FilterSelectComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,8 @@ import { FilterSelectComponent } from './filter-select/filter-select.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule
   ],
   providers: [
     AuthGuard,
